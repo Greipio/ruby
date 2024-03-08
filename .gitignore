@@ -1,3 +1,10 @@
 .git
 .vscode
 .github
+*.gem
+*.rbc
+/.config
+.env
+
+## Environment normalization
+/.bundle/

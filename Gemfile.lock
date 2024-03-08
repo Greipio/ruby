@@ -1,0 +1,18 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    dotenv (3.1.0)
+    minitest (5.22.2)
+    rake (13.1.0)
+
+PLATFORMS
+  arm64-darwin-22
+  ruby
+
+DEPENDENCIES
+  dotenv
+  minitest
+  rake
+
+BUNDLED WITH
+   2.5.6
