@@ -397,9 +397,3 @@ module Greip
     GreipHandler.new(token)
   end
 end
-
-access_token = '0540759999851b6b25e98cbfae03c94e'
-handler = Greip::create(access_token)
-data = handler.lookup({ ip: "1.1.1.1", params: ["security", "timezone", "currency"], lang: "EN", mode: "live" })
-
-puts data
