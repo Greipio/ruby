@@ -1,5 +1,16 @@
+# frozen_string_literal: true
+
+# rubocop:disable Layout/LineLength
+
 require 'bundler/setup'
 require 'rake/testtask'
+
+require 'rake'
+require 'rubocop/rake_task'
+RuboCop::RakeTask.new do |task|
+  task.requires << 'rubocop-performance'
+  task.requires << 'rubocop-rspec'
+end
 
 # Define the test tasks
 task_names = %w[lookup bulk_lookup country profanity asn email_validation phone_validation iban_validation payment_fraud]
@@ -18,3 +29,5 @@ end
 
 desc 'Default task'
 task default: :test
+
+# rubocop:enable Layout/LineLength

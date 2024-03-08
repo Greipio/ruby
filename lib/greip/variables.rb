@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Greip module variables
 module Greip
   BASE_URL = 'https://gregeoip.com'
 

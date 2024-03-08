@@ -5,6 +5,7 @@
 *.rbc
 /.config
 .env
+Gemfile.lock
 
 ## Environment normalization
 /.bundle/
