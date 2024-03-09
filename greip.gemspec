@@ -15,6 +15,7 @@ Gem::Specification.new do |spec|
   spec.description = "The official Gem of Greip for Ruby."
   spec.homepage = "https://greip.io/"
   spec.required_ruby_version = ">= 3.0.0"
+  spec.license = "Apache-2.0"
 
   # spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
 
