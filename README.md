@@ -49,7 +49,7 @@ Here's how you use the methods:
 require 'greip'
 
 access_token = 'your-api-key-goes-here'
-handler = greip.create(access_token)
+handler = Greip.create(access_token)
 data = handler.lookup({ ip: "1.1.1.1", params: ["security", "timezone", "currency"], lang: "EN", mode: "live" })
 
 puts data
@@ -62,7 +62,7 @@ puts data
 require 'greip'
 
 access_token = 'your-api-key-goes-here'
-handler = greip.create(access_token)
+handler = Greip.create(access_token)
 
 data = handler.bulk_lookup({ ips: ["1.1.1.1", "2.2.2.2"], params: ["security", "timezone", "currency"], lang: "EN", mode: "live" })
 
@@ -75,7 +75,7 @@ puts data
 require 'greip'
 
 access_token = 'your-api-key-goes-here'
-handler = greip.create(access_token)
+handler = Greip.create(access_token)
 
 data = handler.asn({ asn: "AS01", mode: "live" })
 
@@ -88,7 +88,7 @@ puts data
 require 'greip'
 
 access_token = 'your-api-key-goes-here'
-handler = greip.create(access_token)
+handler = Greip.create(access_token)
 
 data = handler.profanity({ text: "This is just a normal text", lang: "EN", mode: "live" })
 
@@ -101,7 +101,7 @@ puts data
 require 'greip'
 
 access_token = 'your-api-key-goes-here'
-handler = greip.create(access_token)
+handler = Greip.create(access_token)
 
 data = handler.country({ countryCode: "PS", params: ["timezone", "currency"], lang: "EN", mode: "live" })
 
@@ -114,7 +114,7 @@ puts data
 require 'greip'
 
 access_token = 'your-api-key-goes-here'
-handler = greip.create(access_token)
+handler = Greip.create(access_token)
 
 data = handler.email_validation({ email: "name@domain.com", mode: "live" })
 
@@ -127,7 +127,7 @@ puts data
 require 'greip'
 
 access_token = 'your-api-key-goes-here'
-handler = greip.create(access_token)
+handler = Greip.create(access_token)
 
 data = handler.phone_validation({ phone: "1234567890", countryCode: "TR", mode: "live" })
 
@@ -140,7 +140,7 @@ puts data
 require 'greip'
 
 access_token = 'your-api-key-goes-here'
-handler = greip.create(access_token)
+handler = Greip.create(access_token)
 
 payload = {
   action: "purchase",
@@ -215,7 +215,7 @@ puts data
 require 'greip'
 
 access_token = 'your-api-key-goes-here'
-handler = greip.create(access_token)
+handler = Greip.create(access_token)
 
 data = handler.iban_validation({ iban: "BY86AKBB10100000002966000000" })
 
