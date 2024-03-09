@@ -49,7 +49,7 @@ Here's how you use the methods:
 require 'greip'
 
 access_token = 'your-api-key-goes-here'
-handler = greip::create(access_token)
+handler = greip.create(access_token)
 data = handler.lookup({ ip: "1.1.1.1", params: ["security", "timezone", "currency"], lang: "EN", mode: "live" })
 
 puts data
@@ -58,215 +58,168 @@ puts data
 
 ### 2. Bulk IP Lookup Method
 
-```javascript
-const { Greip } = require("greip-node");
+```ruby
+require 'greip'
 
-let greip = new Greip(process.env.YOUR_GREIP_TOKEN);
+access_token = 'your-api-key-goes-here'
+handler = greip.create(access_token)
 
-greip
-  .BulkLookup({
-    ips: ["1.1.1.1", "2.2.2.2"],
-  })
-  .then((res: any) => {
-    console.log(res.data); // Log Response
-  })
-  .catch((error: any) => {
-    console.log(error);
-  });
+data = handler.bulk_lookup({ ips: ["1.1.1.1", "2.2.2.2"], params: ["security", "timezone", "currency"], lang: "EN", mode: "live" })
+
+puts data
 ```
 
 ### 3. ASN Lookup Method
 
-```javascript
-const { Greip } = require("greip-node");
+```ruby
+require 'greip'
 
-let greip = new Greip(process.env.YOUR_GREIP_TOKEN);
+access_token = 'your-api-key-goes-here'
+handler = greip.create(access_token)
 
-greip
-  .ASN({
-    asn: "AS01",
-  })
-  .then((res: any) => {
-    console.log(res.data); // Log Response
-  })
-  .catch((error: any) => {
-    console.log(error);
-  });
+data = handler.asn({ asn: "AS01", mode: "live" })
+
+puts data
 ```
 
 ### 4. Profanity Detection Method
 
-```javascript
-const { Greip } = require("greip-node");
+```ruby
+require 'greip'
 
-let greip = new Greip(process.env.YOUR_GREIP_TOKEN);
+access_token = 'your-api-key-goes-here'
+handler = greip.create(access_token)
 
-greip
-  .Profanity({
-    text: "This is just normal sample text.",
-  })
-  .then((res: any) => {
-    console.log(res.data); // Log Response
-  })
-  .catch((error: any) => {
-    console.log(error);
-  });
+data = handler.profanity({ text: "This is just a normal text", lang: "EN", mode: "live" })
+
+puts data
 ```
 
 ### 5. Country Lookup Method
 
-```javascript
-const { Greip } = require("greip-node");
+```ruby
+require 'greip'
 
-let greip = new Greip(process.env.YOUR_GREIP_TOKEN);
+access_token = 'your-api-key-goes-here'
+handler = greip.create(access_token)
 
-greip
-  .Country({
-    countryCode: "SA",
-  })
-  .then((res: any) => {
-    console.log(res.data); // Log Response
-  })
-  .catch((error: any) => {
-    console.log(error);
-  });
+data = handler.country({ countryCode: "PS", params: ["timezone", "currency"], lang: "EN", mode: "live" })
+
+puts data
 ```
 
 ### 6. Email Validation Method
 
-```javascript
-const { Greip } = require("greip-node");
+```ruby
+require 'greip'
 
-let greip = new Greip(process.env.YOUR_GREIP_TOKEN);
+access_token = 'your-api-key-goes-here'
+handler = greip.create(access_token)
 
-greip
-  .EmailValidation({
-    email: "name@domain.com",
-  })
-  .then((res: any) => {
-    console.log(res.data); // Log Response
-  })
-  .catch((error: any) => {
-    console.log(error);
-  });
+data = handler.email_validation({ email: "name@domain.com", mode: "live" })
+
+puts data
 ```
 
 ### 7. Phone Validation Method
 
-```javascript
-const { Greip } = require("greip-node");
+```ruby
+require 'greip'
 
-let greip = new Greip(process.env.YOUR_GREIP_TOKEN);
+access_token = 'your-api-key-goes-here'
+handler = greip.create(access_token)
 
-greip
-  .PhoneValidation({
-    phone: "123123123",
-    countryCode: "US",
-  })
-  .then((res: any) => {
-    console.log(res.data); // Log Response
-  })
-  .catch((error: any) => {
-    console.log(error);
-  });
+data = handler.phone_validation({ phone: "1234567890", countryCode: "TR", mode: "live" })
+
+puts data
 ```
 
 ### 8. Payment Fraud Prevention Method
 
-```javascript
-const { Greip } = require("greip-node");
+```ruby
+require 'greip'
 
-let greip = new Greip(process.env.YOUR_GREIP_TOKEN);
+access_token = 'your-api-key-goes-here'
+handler = greip.create(access_token)
 
-greip
-  .PaymentFraud({
-    data: {
-      action: "purchase",
-      website_domain: "",
-      website_name: "",
-      merchant_id: 21,
-      shipment_id: 1,
-      transaction_id: 100,
-      transaction_amount: 1000000,
-      transaction_currency: "GBP",
-      cart_items: {
-        item_id: 1,
-        item_name: "Product name",
-        item_quantity: 1,
-        item_price: "1100.55",
-        item_category_id: 1,
-      },
-      isDigitalProducts: true,
-      coupon: "ASDF",
-      customer_id: 1,
-      customer_firstname: "First",
-      customer_lastname: "Last",
-      customer_pob: "London",
-      customer_ip: "1.1.1.1",
-      customer_country: "GB",
-      customer_region: "London",
-      customer_city: "London",
-      customer_zip: "NW10 7PQ",
-      customer_street: "7 Coronation Road",
-      customer_street2: "",
-      customer_latitude: 0.123,
-      customer_longitude: 0.123,
-      customer_device_id: "UNIQUE_DEVICE_ID",
-      customer_phone: "000000000",
-      customer_registration_date: 1677554670,
-      customer_balance: "1000.00",
-      customer_dob: "1997-19-05",
-      customer_email: "name@domain.com",
-      customer_2fa: true,
-      customer_useragent: "Mozill almaden sdfwer",
-      shipping_country: "GB",
-      shipping_region: "London",
-      shipping_city: "London",
-      shipping_zip: "NW10 7PQ",
-      shipping_street: "7 Coronation Road",
-      shipping_street2: "",
-      shipping_latitude: 0.123,
-      shipping_longitude: 0.123,
-      billing_country: "GB",
-      billing_region: "London",
-      billing_city: "London",
-      billing_zip: "NW10 7PQ",
-      billing_street: "7 Coronation Road",
-      billing_street2: "",
-      billing_latitude: 0.123,
-      billing_longitude: 0.123,
-      payment_type: "applepay",
-      card_name: "First Last",
-      card_number: "1234XXXXXXXX1234",
-      card_expiry: "29/05",
-      cvv_result: true,
-    },
-  })
-  .then((res: any) => {
-    console.log(res.data); // Log Response
-  })
-  .catch((error: any) => {
-    console.log(error);
-  });
+payload = {
+  action: "purchase",
+  website_domain: "",
+  website_name: "",
+  merchant_id: 21,
+  shipment_id: 1,
+  transaction_id: 100,
+  transaction_amount: 1000000,
+  transaction_currency: "GBP",
+  cart_items: {
+    item_id: 1,
+    item_name: "Product name",
+    item_quantity: 1,
+    item_price: "1100.55",
+    item_category_id: 1,
+  },
+  isDigitalProducts: true,
+  coupon: "ASDF",
+  customer_id: 1,
+  customer_firstname: "First",
+  customer_lastname: "Last",
+  customer_pob: "London",
+  customer_ip: "1.1.1.1",
+  customer_country: "GB",
+  customer_region: "London",
+  customer_city: "London",
+  customer_zip: "NW10 7PQ",
+  customer_street: "7 Coronation Road",
+  customer_street2: "",
+  customer_latitude: 0.123,
+  customer_longitude: 0.123,
+  customer_device_id: "UNIQUE_DEVICE_ID",
+  customer_phone: "000000000",
+  customer_registration_date: 1677554670,
+  customer_balance: "1000.00",
+  customer_dob: "1997-19-05",
+  customer_email: "name@domain.com",
+  customer_2fa: true,
+  customer_useragent: "Mozill almaden sdfwer",
+  shipping_country: "GB",
+  shipping_region: "London",
+  shipping_city: "London",
+  shipping_zip: "NW10 7PQ",
+  shipping_street: "7 Coronation Road",
+  shipping_street2: "",
+  shipping_latitude: 0.123,
+  shipping_longitude: 0.123,
+  billing_country: "GB",
+  billing_region: "London",
+  billing_city: "London",
+  billing_zip: "NW10 7PQ",
+  billing_street: "7 Coronation Road",
+  billing_street2: "",
+  billing_latitude: 0.123,
+  billing_longitude: 0.123,
+  payment_type: "applepay",
+  card_name: "First Last",
+  card_number: "1234XXXXXXXX1234",
+  card_expiry: "29/05",
+  cvv_result: true,
+}
+
+data = handler.payment_fraud({ data: payload })
+
+puts data
 ```
 
 ### 9. IBAN Validation Method
 
-```javascript
-const { Greip } = require("greip-node");
+```ruby
+require 'greip'
 
-let greip = new Greip(process.env.YOUR_GREIP_TOKEN);
+access_token = 'your-api-key-goes-here'
+handler = greip.create(access_token)
 
-greip
-  .IBANValidation({
-    iban: "BY86AKBB10100000002966000000",
-  })
-  .then((res: any) => {
-    console.log(res); // Log Response
-  })
-  .catch((error: any) => {
-    console.log(error);
-  });
+data = handler.iban_validation({ iban: "BY86AKBB10100000002966000000" })
+
+puts data
 ```
 
 ## Options, Methods and More
@@ -277,4 +230,4 @@ You can find the full guide of this package by visiting our
 ## Credits
 
 - [Greip Developers](https://greip.io)
-- [All Contributors](https://github.com/Greipio/node/graphs/contributors)
+- [All Contributors](https://github.com/Greipio/ruby/graphs/contributors)
