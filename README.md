@@ -41,9 +41,11 @@ gem install greip
 
 ## Usage
 
-Here's how you use the methods:
+Here's how you can use the Greip Gem in your Ruby project:
 
 ### 1. IP Lookup Method
+
+Use this method to retrieve the information of a given IP address.
 
 ```ruby
 require 'greip'
@@ -58,6 +60,8 @@ puts data
 
 ### 2. Bulk IP Lookup Method
 
+You can use this method to retrieve the information of multiple IP addresses (no need to use the Lookup method inside a loop).
+
 ```ruby
 require 'greip'
 
@@ -70,6 +74,8 @@ puts data
 ```
 
 ### 3. ASN Lookup Method
+
+In this method, Greip will help you lookup any given AS Number and returning all data related to it, like: name, org (the organization name), country, domain, email, phone, totalIPs, list of all routes (v4 & v6) related the given AS Number, etc.
 
 ```ruby
 require 'greip'
@@ -84,6 +90,8 @@ puts data
 
 ### 4. Profanity Detection Method
 
+This method can be used to detect abuse of your website/app. It’s a great way to know more about your user inputs and whether they contain profanity (bad words) or not before releasing them to the public.
+
 ```ruby
 require 'greip'
 
@@ -96,6 +104,8 @@ puts data
 ```
 
 ### 5. Country Lookup Method
+
+This method can help you retrieve information of the given country.
 
 ```ruby
 require 'greip'
@@ -110,6 +120,8 @@ puts data
 
 ### 6. Email Validation Method
 
+This method provides an additional layer of validation for your system. While validating email syntax is important, it is not sufficient.
+
 ```ruby
 require 'greip'
 
@@ -123,6 +135,8 @@ puts data
 
 ### 7. Phone Validation Method
 
+This method can be used as an extra-layer of your system for validating phone numbers. It validates phone number syntax and valid-possibility.
+
 ```ruby
 require 'greip'
 
@@ -135,6 +149,8 @@ puts data
 ```
 
 ### 8. Payment Fraud Prevention Method
+
+Prevent financial losses by deploying AI-Powered modules.
 
 ```ruby
 require 'greip'
@@ -210,6 +226,8 @@ puts data
 ```
 
 ### 9. IBAN Validation Method
+
+This method allows you to validate International Bank Account Numbers (IBANs) and retrieve additional information about the country associated with the IBAN.
 
 ```ruby
 require 'greip'
