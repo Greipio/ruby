@@ -67,6 +67,35 @@ module Greip
       parsed_response["data"]
     end
 
+    def threats(options)
+      ip = options[:ip] || ""
+      mode = (options[:mode] || "live").downcase
+
+      # Validate the ip variable
+      raise StandardError, ErrorMessages::IP unless ip.length > 5
+
+      # Validate the mode variable
+      mode != "live" && mode != "test" && (raise StandardError, ErrorMessages::MODE)
+
+      url = URI(BASE_URL + "/threats?ip=#{ip}&mode=#{mode}&source=Ruby-Gem")
+
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = (url.scheme == "https")
+
+      request = Net::HTTP::Get.new(url)
+      request["Authorization"] = "Bearer #{@token}"
+
+      response = http.request(request)
+
+      raise StandardError, "Error: #{response.code} - #{response.message}" unless response.code == "200"
+
+      parsed_response = JSON.parse(response.body)
+
+      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["status"] == "success"
+
+      parsed_response["data"]
+    end
+
     def bulk_lookup(options)
       ips = options[:ips] || []
       params = options[:params] || []

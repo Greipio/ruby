@@ -15,7 +15,7 @@ The official Ruby Gem of Greip API
 &nbsp;
 [![License: MIT](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/license/apache-2-0)
 &nbsp;
-![API Status](https://img.shields.io/website?down_color=orange&down_message=down&label=API%20status&up_color=green&up_message=up&url=https%3A%2F%2Fgregeoip.com)
+![API Status](https://img.shields.io/website?down_color=orange&down_message=down&label=API%20status&up_color=green&up_message=up&url=https%3A%2F%greipapi.com)
 
 ---
 
@@ -58,7 +58,22 @@ puts data
 
 ```
 
-### 2. Bulk IP Lookup Method
+### 2. IP Threats Method
+
+Use this method to retrieve threat intelligence information associated with a given IP address.
+
+```ruby
+require 'greip'
+
+access_token = 'your-api-key-goes-here'
+handler = Greip.create(access_token)
+data = handler.threats({ ip: "1.1.1.1", mode: "live" })
+
+puts data
+
+```
+
+### 3. Bulk IP Lookup Method
 
 You can use this method to retrieve the information of multiple IP addresses (no need to use the Lookup method inside a loop).
 
@@ -73,7 +88,7 @@ data = handler.bulk_lookup({ ips: ["1.1.1.1", "2.2.2.2"], params: ["security", "
 puts data
 ```
 
-### 3. ASN Lookup Method
+### 4. ASN Lookup Method
 
 In this method, Greip will help you lookup any given AS Number and returning all data related to it, like: name, org (the organization name), country, domain, email, phone, totalIPs, list of all routes (v4 & v6) related the given AS Number, etc.
 
@@ -88,7 +103,7 @@ data = handler.asn({ asn: "AS01", mode: "live" })
 puts data
 ```
 
-### 4. Profanity Detection Method
+### 5. Profanity Detection Method
 
 This method can be used to detect abuse of your website/app. It’s a great way to know more about your user inputs and whether they contain profanity (bad words) or not before releasing them to the public.
 
@@ -103,7 +118,7 @@ data = handler.profanity({ text: "This is just a normal text", lang: "EN", mode:
 puts data
 ```
 
-### 5. Country Lookup Method
+### 6. Country Lookup Method
 
 This method can help you retrieve information of the given country.
 
@@ -118,7 +133,7 @@ data = handler.country({ countryCode: "PS", params: ["timezone", "currency"], la
 puts data
 ```
 
-### 6. Email Validation Method
+### 7. Email Validation Method
 
 This method provides an additional layer of validation for your system. While validating email syntax is important, it is not sufficient.
 
@@ -133,7 +148,7 @@ data = handler.email_validation({ email: "name@domain.com", mode: "live" })
 puts data
 ```
 
-### 7. Phone Validation Method
+### 8. Phone Validation Method
 
 This method can be used as an extra-layer of your system for validating phone numbers. It validates phone number syntax and valid-possibility.
 
@@ -148,7 +163,7 @@ data = handler.phone_validation({ phone: "1234567890", countryCode: "TR", mode: 
 puts data
 ```
 
-### 8. Payment Fraud Prevention Method
+### 9. Payment Fraud Prevention Method
 
 Prevent financial losses by deploying AI-Powered modules.
 
@@ -225,7 +240,7 @@ data = handler.payment_fraud({ data: payload })
 puts data
 ```
 
-### 9. IBAN Validation Method
+### 10. IBAN Validation Method
 
 This method allows you to validate International Bank Account Numbers (IBANs) and retrieve additional information about the country associated with the IBAN.
 
