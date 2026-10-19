@@ -9,9 +9,9 @@ class EmailValidationTest < Minitest::Test
   def test_successful_country
     access_token = ENV.fetch("TOKEN", nil)
     handler = Greip.create(access_token)
-    email = "name@domain.com"
+    email = "name[ar]domain.com"
 
     result = handler.email_validation({ email: email })
-    assert_equal result["isValid"], false
+    refute result["is_valid"]
   end
 end

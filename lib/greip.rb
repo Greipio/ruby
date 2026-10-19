@@ -11,6 +11,7 @@ require_relative "greip/version"
 require_relative "greip/constants"
 require_relative "greip/error_messages"
 
+require "cgi"
 require "json"
 require "net/http"
 require "uri"
@@ -48,7 +49,7 @@ module Greip
       # Validate the mode variable
       mode != "live" && mode != "test" && (raise StandardError, ErrorMessages::MODE)
 
-      url = URI(BASE_URL + "/IPLookup?ip=#{ip}&params=#{params.join(",")}&lang=#{lang}&mode=#{mode}&source=Ruby-Gem")
+      url = URI(BASE_URL + "/lookup/ip/#{CGI.escape(ip)}?params=#{params.join(",")}&lang=#{lang}&mode=#{mode}&source=Ruby-Gem")
 
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = (url.scheme == "https")
@@ -62,7 +63,7 @@ module Greip
 
       parsed_response = JSON.parse(response.body)
 
-      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["status"] == "success"
+      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["success"] == true
 
       parsed_response["data"]
     end
@@ -77,7 +78,7 @@ module Greip
       # Validate the mode variable
       mode != "live" && mode != "test" && (raise StandardError, ErrorMessages::MODE)
 
-      url = URI(BASE_URL + "/threats?ip=#{ip}&mode=#{mode}&source=Ruby-Gem")
+      url = URI(BASE_URL + "/score/ip/#{CGI.escape(ip)}?mode=#{mode}&source=Ruby-Gem")
 
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = (url.scheme == "https")
@@ -91,7 +92,7 @@ module Greip
 
       parsed_response = JSON.parse(response.body)
 
-      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["status"] == "success"
+      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["success"] == true
 
       parsed_response["data"]
     end
@@ -125,7 +126,7 @@ module Greip
       # Validate the mode variable
       mode != "live" && mode != "test" && (raise StandardError, ErrorMessages::MODE)
 
-      url = URI("#{BASE_URL}/BulkLookup?ips=#{ips.join(",")}&params=#{params.join(",")}&lang=#{lang}&mode=#{mode}")
+      url = URI("#{BASE_URL}/geo/ip/bulk?ips=#{ips.join(",")}&params=#{params.join(",")}&lang=#{lang}&mode=#{mode}&source=Ruby-Gem")
 
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = (url.scheme == "https")
@@ -139,7 +140,7 @@ module Greip
 
       parsed_response = JSON.parse(response.body)
 
-      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["status"] == "success"
+      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["success"] == true
 
       parsed_response["data"]
     end
@@ -165,7 +166,7 @@ module Greip
       # Validate the mode variable
       mode != "live" && mode != "test" && (raise StandardError, ErrorMessages::MODE)
 
-      url = URI("#{BASE_URL}/Country?CountryCode=#{country_code}&params=#{params.join(",")}&lang=#{lang}&mode=#{mode}")
+      url = URI("#{BASE_URL}/lookup/countries/#{CGI.escape(country_code)}?params=#{params.join(",")}&lang=#{lang}&mode=#{mode}&source=Ruby-Gem")
 
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = (url.scheme == "https")
@@ -179,7 +180,7 @@ module Greip
 
       parsed_response = JSON.parse(response.body)
 
-      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["status"] == "success"
+      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["success"] == true
 
       parsed_response["data"]
     end
@@ -199,13 +200,21 @@ module Greip
       # Validate the mode variable
       mode != "live" && mode != "test" && (raise StandardError, ErrorMessages::MODE)
 
-      url = URI("#{BASE_URL}/badWords?text=#{text}&params=#{params.join(",")}&format=JSON&lang=#{lang}&mode=#{mode}")
+      url = URI("#{BASE_URL}/score/text")
 
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = (url.scheme == "https")
 
-      request = Net::HTTP::Get.new(url)
+      request = Net::HTTP::Post.new(url)
+      request["Content-Type"] = "application/json"
       request["Authorization"] = "Bearer #{@token}"
+      request.body = {
+        text: text,
+        format: "JSON",
+        lang: lang,
+        mode: mode,
+        source: "Ruby-Gem"
+      }.to_json
 
       response = http.request(request)
 
@@ -213,7 +222,7 @@ module Greip
 
       parsed_response = JSON.parse(response.body)
 
-      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["status"] == "success"
+      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["success"] == true
 
       parsed_response["data"]
     end
@@ -228,7 +237,7 @@ module Greip
       # Validate the mode variable
       mode != "live" && mode != "test" && (raise StandardError, ErrorMessages::MODE)
 
-      url = URI("#{BASE_URL}/ASNLookup?asn=#{asn}&mode=#{mode}")
+      url = URI("#{BASE_URL}/lookup/asn/#{CGI.escape(asn)}?mode=#{mode}&source=Ruby-Gem")
 
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = (url.scheme == "https")
@@ -242,7 +251,7 @@ module Greip
 
       parsed_response = JSON.parse(response.body)
 
-      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["status"] == "success"
+      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["success"] == true
 
       parsed_response["data"]
     end
@@ -257,7 +266,7 @@ module Greip
       # Validate the mode variable
       mode != "live" && mode != "test" && (raise StandardError, ErrorMessages::MODE)
 
-      url = URI("#{BASE_URL}/validateEmail?email=#{email}&mode=#{mode}")
+      url = URI("#{BASE_URL}/score/email/#{CGI.escape(email)}?mode=#{mode}&source=Ruby-Gem")
 
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = (url.scheme == "https")
@@ -271,7 +280,7 @@ module Greip
 
       parsed_response = JSON.parse(response.body)
 
-      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["status"] == "success"
+      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["success"] == true
 
       parsed_response["data"]
     end
@@ -287,7 +296,7 @@ module Greip
       # Validate the mode variable
       mode != "live" && mode != "test" && (raise StandardError, ErrorMessages::MODE)
 
-      url = URI("#{BASE_URL}/validatePhone?phone=#{phone}&countryCode=#{country_code}&mode=#{mode}")
+      url = URI("#{BASE_URL}/score/phone/#{CGI.escape(phone)}?country_code=#{country_code}&mode=#{mode}&source=Ruby-Gem")
 
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = (url.scheme == "https")
@@ -301,7 +310,7 @@ module Greip
 
       parsed_response = JSON.parse(response.body)
 
-      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["status"] == "success"
+      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["success"] == true
 
       parsed_response["data"]
     end
@@ -316,7 +325,7 @@ module Greip
       # Validate the mode variable
       mode != "live" && mode != "test" && (raise StandardError, ErrorMessages::MODE)
 
-      url = URI("#{BASE_URL}/validateIBAN?iban=#{iban}&mode=#{mode}")
+      url = URI("#{BASE_URL}/lookup/iban/#{CGI.escape(iban)}?mode=#{mode}&source=Ruby-Gem")
 
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = (url.scheme == "https")
@@ -330,7 +339,7 @@ module Greip
 
       parsed_response = JSON.parse(response.body)
 
-      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["status"] == "success"
+      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["success"] == true
 
       parsed_response["data"]
     end
@@ -345,7 +354,7 @@ module Greip
       # Validate the data variable
       raise StandardError, ErrorMessages::DATA unless data.is_a?(Hash) && !data.empty?
 
-      url = URI("#{BASE_URL}/paymentFraud")
+      url = URI("#{BASE_URL}/score/payments")
 
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = (url.scheme == "https")
@@ -353,14 +362,14 @@ module Greip
       request = Net::HTTP::Post.new(url)
       request["Content-Type"] = "application/json"
       request["Authorization"] = "Bearer #{@token}"
-      request.body = data.to_json
+      request.body = { data: data, mode: mode, source: "Ruby-Gem" }.to_json
 
       response = http.request(request)
 
       raise StandardError, "Error: #{response.code} - #{response.message}" unless response.code == "200"
 
       parsed_response = JSON.parse(response.body)
-      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["status"] == "success"
+      raise StandardError, "Error: #{parsed_response["description"]}" unless parsed_response["success"] == true
 
       parsed_response["data"]
     end

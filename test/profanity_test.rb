@@ -12,6 +12,6 @@ class ProfanityTest < Minitest::Test
     text = "This is just a normal text (without profanity)"
 
     result = handler.profanity({ text: text })
-    assert_equal result["isSafe"], true
+    assert_equal "low", result["risk_level"]
   end
 end

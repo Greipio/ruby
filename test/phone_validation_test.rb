@@ -14,6 +14,6 @@ class PhoneValidationTest < Minitest::Test
 
     result = handler.phone_validation({ phone: phone, countryCode: country_code })
 
-    assert_equal result["isValid"], false
+    refute result["is_valid"]
   end
 end

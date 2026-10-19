@@ -12,6 +12,6 @@ class LookupTest < Minitest::Test
     ip_address = "1.1.1.1"
 
     result = handler.lookup({ ip: ip_address })
-    assert_equal ip_address, result["ip"]
+    assert_equal ip_address, result.dig("ip", "address")
   end
 end

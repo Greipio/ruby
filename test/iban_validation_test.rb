@@ -12,6 +12,6 @@ class IBANValidationTest < Minitest::Test
     iban = "DE89370400440532013000"
 
     result = handler.iban_validation({ iban: iban })
-    assert_equal result["isValid"], true
+    assert_equal result["is_valid"], true
   end
 end

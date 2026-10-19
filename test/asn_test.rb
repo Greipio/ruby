@@ -9,9 +9,9 @@ class ASNTest < Minitest::Test
   def test_successful_country
     access_token = ENV.fetch("TOKEN", nil)
     handler = Greip.create(access_token)
-    asn = "AS01"
+    asn = "AS13335"
 
     result = handler.asn({ asn: asn })
-    assert_equal asn, result["asn"]
+    assert_equal asn, result["number"]
   end
 end

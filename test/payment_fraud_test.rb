@@ -15,6 +15,7 @@ class PaymentFraudTest < Minitest::Test
     }
 
     result = handler.payment_fraud({ data: data })
-    assert_instance_of(Integer, result["score"])
+    assert result.key?("score")
+    assert result["score"].is_a?(Numeric)
   end
 end

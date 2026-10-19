@@ -12,6 +12,6 @@ class BulkLookupTest < Minitest::Test
     ip_address = "1.1.1.1"
 
     result = handler.bulk_lookup({ ips: [ip_address] })
-    assert_equal ip_address, result[ip_address]["ip"]
+    assert_equal ip_address, result.dig(ip_address, "ip", "address")
   end
 end

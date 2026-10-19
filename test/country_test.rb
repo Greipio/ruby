@@ -12,6 +12,6 @@ class CountryTest < Minitest::Test
     country_code = "US"
 
     result = handler.country({ countryCode: country_code })
-    assert_equal country_code, result["countryCode"]
+    assert_equal country_code, result.dig("geo", "country_code")
   end
 end
