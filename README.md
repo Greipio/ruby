@@ -13,7 +13,7 @@ The official Ruby Gem of Greip API
 &nbsp;
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Greipio/ruby?color=green&label=Minified%20size&logo=github)
 &nbsp;
-[![License: MIT](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/license/apache-2-0)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/license/apache-2-0)
 &nbsp;
 ![API Status](https://img.shields.io/website?down_color=orange&down_message=down&label=API%20status&up_color=green&up_message=up&url=https%3A%2F%2Fgreipapi.com)
 
@@ -39,6 +39,19 @@ Or, install it with the following command:
 gem install greip
 ```
 
+Pin the v2 line in your `Gemfile`:
+
+```ruby
+gem 'greip', '~> 2.0'
+```
+
+## Greip API v2 (`greip` 2.x)
+
+This major release targets **[Greip API v2](https://v2.greipapi.com)**. See [CHANGELOG.md](./CHANGELOG.md).
+
+- The gem uses **Bearer** authentication with your API token.
+- Methods return the API **`data`** hash with v2 keys (`ip` → `address`, `geo` → `country_code`, `is_valid`, ASN `number`, profanity `risk_level`, etc.).
+
 ## Usage
 
 Here's how you can use the Greip Gem in your Ruby project:
@@ -54,7 +67,7 @@ access_token = 'your-api-key-goes-here'
 handler = Greip.create(access_token)
 data = handler.lookup({ ip: "1.1.1.1", params: ["security", "timezone", "currency"], lang: "EN", mode: "live" })
 
-puts data
+puts data.dig("ip", "address"), data.dig("geo", "country_code")
 
 ```
 
@@ -98,7 +111,7 @@ require 'greip'
 access_token = 'your-api-key-goes-here'
 handler = Greip.create(access_token)
 
-data = handler.asn({ asn: "AS01", mode: "live" })
+data = handler.asn({ asn: "AS13335", mode: "live" })
 
 puts data
 ```
